@@ -71,5 +71,16 @@
             <field name="user_id"></field><!-- En blanco para que esté dispoñible para todos os usuarios -->
             <field name="action_id" eval="ref('odoo_basico.informacion_list_action')"/><!-- Obtemos o id a partir do id externo-->
     </record>
+    <record model="ir.filters" id="filtro3">
+            <field name="name">Filtro informacion personalizado</field>
+            <field name="model_id">odoo_basico.informacion</field>
+            <field name="context">{'group_by': ['sexo_traducido']}</field>
+            <field name="is_default">false</field>
+            <field name="active">true</field>
+            <field name="sort">[]</field>
+            <field name="domain">[('autorizado', '=', True)]</field><!-- Aquí iría o filtro -->
+            <field name="user_id"></field><!-- En blanco para que esté dispoñible para todos os usuarios -->
+            <field name="action_id" eval="ref('odoo_basico.informacion_list_action')"/><!-- Obtemos o id a partir do id externo-->
+    </record>
   </data>
 </odoo>
