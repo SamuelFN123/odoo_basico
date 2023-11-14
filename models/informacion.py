@@ -13,3 +13,4 @@ class informacion(models.Model):
     peso = fields.Float(digits=(6,2), default=2.7, string="Peso en KG.s")
     autorizado = fields.Boolean(default=True, string="¿Autorizado?")
     sexo_traducido = fields.Selection([("Hombre", "Home"), ("Mujer", "Muller"), ("Otros", "Outros")], string="Sexo:")
+    # ("Hombre", "Home") el primero se guarda en BBDD, el segundo es el que se muestra en Odoo
