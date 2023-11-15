@@ -23,6 +23,7 @@
               <field name="alto_en_cms"/>
               <field name="longo_en_cms"/>
               <field name="ancho_en_cms"/>
+              <field name="volume"/>
               <field name="peso"/>
               <field name="autorizado"/>
               <field name="sexo_traducido"/>
@@ -42,10 +43,11 @@
           <field name="alto_en_cms"/>
           <field name="longo_en_cms"/>
           <field name="ancho_en_cms"/>
+          <field name="volume"/>
           <field name="peso"/>
           <field name="autorizado"/>
           <field name="sexo_traducido"/>
-        </tree>
+          </tree>
       </field>
     </record>
 
