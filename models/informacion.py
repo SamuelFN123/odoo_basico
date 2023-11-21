@@ -6,15 +6,18 @@ from odoo.exceptions import ValidationError
 class informacion(models.Model):
     _name = 'odoo_basico.informacion'
     _description = 'exemplo de Ola Mundo:'
+    _sql_constraints = [('nomeUnico', 'unique(name)', 'Non se pode repetir o nome')]
+    _order = "descripcion desc"
 
     name = fields.Char(required=True, size=20, string="Titulo")
     descripcion = fields.Text(string="A descripción")
     alto_en_cms = fields.Integer(string="Alto en centímetros")
     longo_en_cms = fields.Integer(string="Longo en centímetros")
     ancho_en_cms = fields.Integer(string="Ancho en centímetros")
-    volume = fields.Float(compute="_volume",stor=True)
+    volume = fields.Float(digits=(6, 7), compute="_volume",store=True, string="Volume en m3")
+    densidade = fields.Float(digits=(6, 2), compute="_densidade", store=True, string="Densidade en KG/m3")
     literal = fields.Char(store=False)
-    peso = fields.Float(digits=(6,2), default=2.7, string="Peso en KG.s")
+    peso = fields.Float(digits=(6, 2), default=2.7, string="Peso en KG.s")
     autorizado = fields.Boolean(default=True, string="¿Autorizado?")
     sexo_traducido = fields.Selection([("Hombre", "Home"), ("Mujer", "Muller"), ("Otros", "Outros")], string="Sexo:")
     # ("Hombre", "Home") el primero se guarda en BBDD, el segundo es el que se muestra en Odoo
@@ -22,7 +25,15 @@ class informacion(models.Model):
     @api.depends('alto_en_cms', 'longo_en_cms', 'ancho_en_cms')
     def _volume(self):
         for rexistro in self:
-            rexistro.volume = float(rexistro.alto_en_cms) * float(rexistro.longo_en_cms) * float(rexistro.ancho_en_cms)
+            rexistro.volume = float(rexistro.alto_en_cms) * float(rexistro.longo_en_cms) * float(rexistro.ancho_en_cms) / 1000000
+
+    @api.depends('volume', 'peso')
+    def _densidade(self):
+        for rexistro in self:
+            if rexistro.volume != 0:
+                rexistro.densidade = float(rexistro.peso) / float(rexistro.volume)
+            else:
+                rexistro.densidade = 0
 
     @api.onchange('alto_en_cms')
     def _avisoAlto(self):
