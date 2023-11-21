@@ -19,20 +19,47 @@
           <sheet>
             <group>
               <field name="name"/>
-              <field name="descripcion"/>
-              <field name="alto_en_cms"/>
-              <field name="longo_en_cms"/>
-              <field name="ancho_en_cms"/>
-              <field name="volume"/>
-              <field name="peso"/>
-              <field name="autorizado"/>
-              <field name="sexo_traducido"/>
             </group>
+            <notebook>
+              <page string="Datos Texto">
+                <group>
+                  <field name="descripcion"/>
+                  <field name="autorizado"/>
+                  <field name="sexo_traducido"/>
+                </group>
+              </page>
+              <page string="Datos Numéricos">
+                <group>
+                    <field name="alto_en_cms"/>
+                    <field name="longo_en_cms"/>
+                    <field name="ancho_en_cms"/>
+                </group>
+                <group>
+                    <field name="volume"/>
+                    <field name="peso"/>
+                </group>
+              </page>
+              <page string="Binary">
+                <group>
+
+                </group>
+              </page>
+              <page string="Moedas">
+                <group>
+
+                </group>
+              </page>
+              <page string="Data e horas">
+                <group>
+
+                </group>
+              </page>
+            </notebook>
           </sheet>
         </form>
       </field>
     </record>
-    
+
     <record model="ir.ui.view" id="informacion_tree_view">
       <field name="name">informacion.tree</field>
       <field name="model">odoo_basico.informacion</field>
