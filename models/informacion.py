@@ -21,6 +21,9 @@ class informacion(models.Model):
     autorizado = fields.Boolean(default=True, string="¿Autorizado?")
     sexo_traducido = fields.Selection([("Hombre", "Home"), ("Mujer", "Muller"), ("Otros", "Outros")], string="Sexo:")
     # ("Hombre", "Home") el primero se guarda en BBDD, el segundo es el que se muestra en Odoo
+    foto = fields.Binary(string='Foto')
+    adxunto_nome = fields.Char(string="Nome Adxunto")
+    adxunto = fields.Binary(string="Arquivo adxunto")
 
     @api.depends('alto_en_cms', 'longo_en_cms', 'ancho_en_cms')
     def _volume(self):
