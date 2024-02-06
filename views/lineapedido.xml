@@ -14,9 +14,9 @@
       <field name="name">lineapedido.tree</field>
       <field name="model">odoo_basico.lineapedido</field>
       <field name="arch" type="xml">
-          <tree string="lineapedido tree">
-              <field name="name"/>
-          </tree>
+        <tree string="lineapedido tree">
+          <field name="descripcion"/>
+        </tree>
       </field>
     </record>
 
@@ -28,6 +28,7 @@
           <sheet>
             <group>
               <field name="name"/>
+              <field name="descripcion"/>
             </group>
           </sheet>
         </form>

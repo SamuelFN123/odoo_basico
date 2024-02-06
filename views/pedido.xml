@@ -22,18 +22,21 @@
       </field>
     </record>
 
-    <record model="ir.ui.view" id="informacion_form_view">
-      <field name="name">informacion.form</field>
-      <field name="model">odoo_basico.informacion</field>
+    <record model="ir.ui.view" id="pedido_form_view">
+      <field name="name">pedido.form</field>
+      <field name="model">odoo_basico.pedido</field>
       <field name="arch" type="xml">
-        <form string="Formulario de Informacion">
+        <form string="Formulario de Pedido">
           <sheet>
             <group>
               <field name="name"/>
             </group>
+            <separator string="Visualizar e engadir"/>
+            <field name="lineapedido_ids"/> <!-- para que no sea editable readonly="1" -->
           </sheet>
         </form>
       </field>
     </record>
+
   </data>
 </odoo>
