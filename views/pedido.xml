@@ -27,6 +27,11 @@
       <field name="model">odoo_basico.pedido</field>
       <field name="arch" type="xml">
         <form string="Formulario de Pedido">
+          <header>
+            <button name="actualizadorSexo" type="object" string="Actualiza o campo Sexo do modelo información"/>
+            <button name="creaRexistroInformacion" type="object" string="Crear Rexistro de Información"/>
+            <button name="actualizaRexistroInformacion" type="object" string="Actualizar Rexistro de Información"/>
+          </header>
           <sheet>
             <group>
               <field name="name"/>
