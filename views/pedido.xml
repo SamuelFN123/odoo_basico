@@ -31,6 +31,7 @@
             <button name="actualizadorSexo" type="object" string="Actualiza o campo Sexo do modelo información"/>
             <button name="creaRexistroInformacion" type="object" string="Crear Rexistro de Información"/>
             <button name="actualizaRexistroInformacion" type="object" string="Actualizar Rexistro de Información"/>
+            <button name="actualizadorHoraTimezone" type="object" string="Actualiza Hora Timezone do Usuario en todos os rexistros do modelo información"/>
           </header>
           <sheet>
             <group>
