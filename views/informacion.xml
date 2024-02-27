@@ -16,6 +16,10 @@
       <field name="model">odoo_basico.informacion</field>
       <field name="arch" type="xml">
         <form string="Formulario de Informacion">
+            <header>
+                <button name="envio_email" type="object" string="Enviar Email"/>
+                <button name="ver_contexto" type="object" string="Ver Contexto"/>
+            </header>
           <sheet>
             <group>
               <field name="name"/>
@@ -59,7 +63,8 @@
               </page>
               <page string="Data e horas">
                 <group>
-
+                    <field name="data"/>
+                    <field name="data_hora"/>
                 </group>
               </page>
             </notebook>
@@ -83,6 +88,8 @@
           <field name="densidade"/>
           <field name="autorizado"/>
           <field name="sexo_traducido"/>
+          <field name="data"/>
+          <field name="data_hora"/>
           </tree>
       </field>
     </record>

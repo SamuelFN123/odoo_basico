@@ -32,16 +32,17 @@
     </record>
 
     <report id="action_report_informacion"
-        string="Listaxe de Información"
-        model="odoo_basico.informacion" report_type="qweb-pdf"
-        name="odoo_basico.report_informacion_template"
-        paperformat="paperformat_euro_portrait"/>
+            string="Listaxe de Información"
+            model="odoo_basico.informacion" report_type="qweb-pdf"
+            name="odoo_basico.report_informacion_template"
+            paperformat="paperformat_euro_portrait"/>
 
     <report id="action_report_foto_informacion"
             string="Listaxe das fotos en Información"
             model="odoo_basico.informacion" report_type="qweb-pdf"
             name="odoo_basico.report_foto_informacion_template"
-            paperformat="paperformat_euro_landscape"/>
+            paperformat="paperformat_euro_landscape"
+    />
 
     <template id="report_informacion_template">
         <t t-call="web.html_container">
@@ -49,45 +50,45 @@
                 <div class="page">
                     <div class="container">
                         <table class="table table-sm">
-                        <thead>
-                            <tr class="bg-primary">
-                                <th class="text-left">Titulo(name)</th>
-                                <th class="text-left">Peso</th>
-                                <th class="text-left">Autorizado</th>
-                                <th class="text-left">Sexo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <t t-set="suma_peso" t-value="0" />
-                            <t t-foreach="docs" t-as="o">
-                                <tr>
-                                    <td class="text-left">
-                                        <h5><span t-field="o.name" /></h5>
-                                    </td>
-                                    <td class="text-left">
-                                        <span t-field="o.peso" />
-                                        <t t-if="o.peso &gt; 3">
-                                            <t t-set="suma_peso" t-value="suma_peso + o.peso" />
-                                        </t>
-                                    </td>
-                                    <td class="text-left">
-                                        <t t-if="o.autorizado == True">
-                                            <span>SI</span>
-                                        </t>
-                                        <t t-else="">
-                                            <span>NON</span>
-                                        </t>
-                                    </td>
-                                    <td class="text-left">
-                                        <h5><span t-field="o.sexo_traducido" /></h5>
-                                    </td>
+                            <thead>
+                                <tr class="bg-primary">
+                                    <th class="text-left">Titulo(name)</th>
+                                    <th class="text-left">Peso</th>
+                                    <th class="text-left">Autorizado</th>
+                                    <th class="text-left">Sexo</th>
                                 </tr>
-                            </t>
-                            <td class="text-left"><span>Suma de pesos maior a 3 </span></td>
-                            <td class="text-left"><span t-esc="suma_peso"/></td>
-                            <td class="text-left"><span>Total Pesos: </span></td>
-                            <td class="text-left"><span t-esc="sum([x.peso for x in docs])"/> </td>
-                        </tbody>
+                            </thead>
+                            <tbody>
+                                <t t-set="suma_peso" t-value="0" />
+                                <t t-foreach="docs" t-as="o">
+                                    <tr>
+                                        <td class="text-left">
+                                            <h5><span t-field="o.name" /></h5>
+                                        </td>
+                                        <td class="text-left">
+                                            <span t-field="o.peso" />
+                                            <t t-if="o.peso &gt; 3">
+                                                <t t-set="suma_peso" t-value="suma_peso + o.peso" />
+                                            </t>
+                                        </td>
+                                        <td class="text-left">
+                                            <t t-if="o.autorizado == True">
+                                                <span>SI</span>
+                                            </t>
+                                            <t t-else="">
+                                                <span>NON</span>
+                                            </t>
+                                        </td>
+                                        <td class="text-left">
+                                            <h5><span t-field="o.sexo_traducido" /></h5>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <td class="text-left"><span>Suma de pesos maior a 3 </span></td>
+                                <td class="text-left"><span t-esc="suma_peso"/></td>
+                                <td class="text-left"><span>Total Pesos: </span></td>
+                                <td class="text-left"><span t-esc="sum([x.peso for x in docs])"/> </td>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -110,6 +111,7 @@
                                         <h5><span t-field="o.descripcion" /></h5>
                                     </div>
                                     <div  class="row"  style="margin: auto; width: 55%;">
+<!--                                        <img t-att-src="'data:image/png;base64,%s' % to_text(o.foto)"/>-->
                                         <img t-attf-src="data:image/*;base64,{{o.foto}} "  style="max-height: 500px;max-width: 500px;"/>
                                     </div>
                                 </div>
@@ -120,5 +122,4 @@
             </t>
         </t>
     </template>
-
 </odoo>

@@ -1,7 +1,7 @@
 
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
-
+import os
 
 class informacion(models.Model):
     _name = 'odoo_basico.informacion'
@@ -33,6 +33,8 @@ class informacion(models.Model):
                                  string="Moeda en formato texto", store=True)
     creador_da_moeda = fields.Char(related="moeda_id.create_uid.login",
                                    string="Usuario creador da moeda", store=True)
+    data = fields.Date(string="Data", default=lambda self: fields.Date.today())
+    data_hora = fields.Datetime(string="Data e Hora", default=lambda self: fields.Datetime.now())
 
     @api.depends('alto_en_cms', 'longo_en_cms', 'ancho_en_cms')
     def _volume(self):
@@ -63,3 +65,33 @@ class informacion(models.Model):
 
     def _cambia_campo_sexo(self, rexistro):
         rexistro.sexo_traducido = "Hombre"
+
+    def envio_email(self):
+        meu_usuario = self.env.user
+        # mail_de     Odoo pon o email que configuramos en gmail para facer o envio
+        mail_reply_to = meu_usuario.partner_id.email  # o enderezo email que ten asociado o noso usuario
+        mail_para = 'samuelfraguas123@gmail.com'  # o enderezo email de destino
+        mail_valores = {
+            'subject': 'Aquí iría o asunto do email ',
+            'author_id': meu_usuario.id,
+            'email_from': mail_reply_to,
+            'email_to': mail_para,
+            'message_type': 'email',
+            'body_html': 'Aquí iría o corpo do email cos datos por exemplo de "%s" ' % self.descripcion,
+        }
+        mail_id = self.env['mail.mail'].create(mail_valores)
+        mail_id.sudo().send()
+        return True
+
+    def ver_contexto(self):  # Este método é chamado dende un botón de informacion.xml
+        for rexistro in self:
+            # Ao usar warning temos que importar a libreria mediante from odoo.exceptions import Warning
+            # Importamos tamén a libreria os mediante import os
+            # raise Warning('Contexto: %s Ruta: %s Contido do directorio %s' % (rexistro.env.context, os.getcwd(), os.listdir(os.getcwd())))
+
+            # Warning is deprecated por iso usamos ValidationError
+
+            raise ValidationError('Contexto: %s Ruta: %s Contido do directorio %s' % (
+                rexistro.env.context, os.getcwd(), os.listdir(os.getcwd())))
+            # env.context é un diccionario  https://www.w3schools.com/python/python_dictionaries.asp
+        return True
