@@ -43,8 +43,8 @@ class informacion(models.Model):
     hora_actual = fields.Char(compute="_hora_actual", string="Hora Actual", size=15, store=True)
     mes_castelan = fields.Char(compute="_mes_castelan", string="Mes Castelán", size=15, store=True)
     mes_galego = fields.Char(compute="_mes_galego", string="Mes Galego", size=15, store=True)
-    mes_ingles = fields.Char(compute="_mes_ingles", string="Mes Inglés", size=15, store=True)
-    mes_frances = fields.Char(compute="_mes_frances", string="Mes Francés", size=15, store=True)
+    #mes_ingles = fields.Char(compute="_mes_ingles", string="Mes Inglés", size=15, store=True)
+    #mes_frances = fields.Char(compute="_mes_frances", string="Mes Francés", size=15, store=True)
     @api.depends('alto_en_cms', 'longo_en_cms', 'ancho_en_cms')
     def _volume(self):
         for rexistro in self:
