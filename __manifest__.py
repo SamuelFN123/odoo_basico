@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base','account'],
 
     # always loaded
     'data': [
@@ -33,6 +33,7 @@
         'views/persoa.xml',
         'reports/report_header.xml',
         'reports/report_informacion.xml',
+        'accions_planificadas/accion_planificada.xml',
         'security/ir.model.access.csv',
     ],
     # only loaded in demonstration mode
