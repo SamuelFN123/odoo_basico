@@ -30,6 +30,7 @@
         'views/templates.xml',
         'views/suceso.xml',
         'views/menu.xml',
+        'views/persoa.xml',
         'reports/report_header.xml',
         'reports/report_informacion.xml',
         'security/ir.model.access.csv',

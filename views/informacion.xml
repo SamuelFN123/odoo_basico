@@ -75,6 +75,8 @@
                     <field name="data"/>
                     <field name="mes_castelan"/>
                     <field name="mes_galego"/>
+                    <field name="mes_ingles"/>
+                    <field name="mes_frances"/>
                   </group>
                 </group>
               </page>
@@ -106,6 +108,8 @@
           <field name="hora_timezone_usuario"/>
           <field name="mes_castelan"/>
           <field name="mes_galego"/>
+          <field name="mes_ingles"/>
+          <field name="mes_frances"/>
         </tree>
       </field>
     </record>

@@ -9,6 +9,11 @@ class pedido(models.Model):
 
     name = fields.Char(required=True, size=20, string="Identificador de Pedido:")
     lineapedido_ids = fields.One2many("odoo_basico.lineapedido", 'pedido_id')
+    persoa_id = fields.Many2one('res.partner', ondelete='set null', domain="[('visible','=','True')]", index=True,
+                                string="Persoa")
+
+    # persoa_id = fields.Many2one('res.partner', ondelete='set null', domain="[]", index=True,
+    #                             string="Persoa")
 
     def actualizadorSexo(self):
         informacion_ids = self.env['odoo_basico.informacion'].search([('autorizado', '=', False)])
