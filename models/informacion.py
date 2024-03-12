@@ -1,10 +1,11 @@
-
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 import os
 import pytz
 import locale
 from . import miñasUtilidades
+
+
 class informacion(models.Model):
     _name = 'odoo_basico.informacion'
     _description = 'exemplo de Ola Mundo:'
@@ -16,7 +17,7 @@ class informacion(models.Model):
     alto_en_cms = fields.Integer(string="Alto en centímetros")
     longo_en_cms = fields.Integer(string="Longo en centímetros")
     ancho_en_cms = fields.Integer(string="Ancho en centímetros")
-    volume = fields.Float(digits=(6, 7), compute="_volume",store=True, string="Volume en m3")
+    volume = fields.Float(digits=(6, 7), compute="_volume", store=True, string="Volume en m3")
     densidade = fields.Float(digits=(6, 2), compute="_densidade", store=True, string="Densidade en KG/m3")
     literal = fields.Char(store=False)
     peso = fields.Float(digits=(6, 2), default=2.7, string="Peso en KG.s")
@@ -31,7 +32,7 @@ class informacion(models.Model):
 
     moeda_euro_id = fields.Many2one('res.currency',
                                     default=lambda self: self.env['res.currency'].search([('name', '=', "EUR")],
-                                    limit=1))
+                                                                                         limit=1))
 
     gasto_en_euros = fields.Monetary("Gasto en Euros", 'moeda_euro_id')
     moeda_en_texto = fields.Char(related="moeda_id.currency_unit_label",
@@ -48,10 +49,12 @@ class informacion(models.Model):
     mes_galego = fields.Char(compute="_mes_galego", string="Mes Galego", size=15, store=True)
     mes_ingles = fields.Char(compute="_mes_ingles", string="Mes Inglés", size=15, store=True)
     mes_frances = fields.Char(compute="_mes_frances", string="Mes Francés", size=15, store=True)
+
     @api.depends('alto_en_cms', 'longo_en_cms', 'ancho_en_cms')
     def _volume(self):
         for rexistro in self:
-            rexistro.volume = float(rexistro.alto_en_cms) * float(rexistro.longo_en_cms) * float(rexistro.ancho_en_cms) / 1000000
+            rexistro.volume = float(rexistro.alto_en_cms) * float(rexistro.longo_en_cms) * float(
+                rexistro.ancho_en_cms) / 1000000
 
     @api.depends('volume', 'peso')
     def _densidade(self):
@@ -108,7 +111,6 @@ class informacion(models.Model):
             # env.context é un diccionario  https://www.w3schools.com/python/python_dictionaries.asp
         return True
 
-
     def convirte_data_hora_de_utc_a_timezone_do_usuario(self,
                                                         data_hora_utc_object):  # recibe a data hora en formato object
         usuario_timezone = pytz.timezone(
@@ -121,7 +123,6 @@ class informacion(models.Model):
     def _hora_utc(self):
         for rexistro in self:  # A hora se almacena na BD en horario UTC (2 horas menos no verán, 1 hora menos no inverno)
             rexistro.hora_utc = rexistro.data_hora.strftime("%H:%M:%S")
-
 
     def actualiza_hora_actual_UTC(
             self):  # Esta función é chamada dende un boton de informacion.xml e dende _hora_actual
@@ -140,7 +141,6 @@ class informacion(models.Model):
             self)  # leva self como parametro por que actualiza_hora_timezone_usuario ten 2 parametros
         # porque usamos tamén actualiza_hora_timezone_usuario dende outro modelo (pedido.py) e lle pasamos como parámetro o obxeto_rexistro
 
-
     # Esta función será chamada dende a función actualiza_hora_timezone_usuario_dende_boton_e_apidepends e
     #  dende pedido.py (Cando insertamos os valores do template self.env.user.tz non ten o timezone do usuario por iso se carga coa hora UTC,
     #  o botón en pedido.py é para actualizar todos os rexistros masivamente dende outro modelo)
@@ -152,7 +152,6 @@ class informacion(models.Model):
     def _hora_timezone_usuario(self):
         for rexistro in self:
             rexistro.actualiza_hora_timezone_usuario_dende_boton_e_apidepends()
-
 
     # Podemos  configurar locales a nivel de sistema con dpkg-reconfigure locales poñendo un por defecto.
     # apt-get install locales

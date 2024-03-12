@@ -34,6 +34,7 @@
         'reports/report_header.xml',
         'reports/report_informacion.xml',
         'accions_planificadas/accion_planificada.xml',
+        'security/xestion_usuarios.xml',
         'security/ir.model.access.csv',
     ],
     # only loaded in demonstration mode
